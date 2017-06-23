@@ -11,6 +11,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
        //fff
 
-        String testtest = "친절한 곰선생님";
+        String testtest = "친절한 곰선생님aaaaaaa";
     }
 }
