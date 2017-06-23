@@ -13,6 +13,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText email, password;
     //  SQLiteDatabase db;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
