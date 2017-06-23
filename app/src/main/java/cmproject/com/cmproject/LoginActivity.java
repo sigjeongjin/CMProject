@@ -23,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
         password = (EditText)findViewById(R.id.password);
         btnRegister = (Button)findViewById(R.id.btnregister);
         autoLogin = (CheckBox)findViewById(R.id.checkbox);
+
 //        db =(SQLiteDatabase)findViewById(R.id.SQLiteDatabase);
     }
 }
