@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnPushHistoryActivityGo = (Button) findViewById(R.id.PushHistoryActivityGo);
+        btnPushHistoryActivityGo = (Button) findViewById(R.id.pushHistoryActivityGo);
 
         btnPushHistoryActivityGo.setOnClickListener(new View.OnClickListener() {
             @Override
