@@ -10,5 +10,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
        //fff
+
+        String testtest = "친절한 곰선생님";
     }
 }
