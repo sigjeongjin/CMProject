@@ -2,7 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cmproject.com.cmproject">
 
+    <!-- Android mapView LIB -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- Android mapView LIB -->
+    <uses-library android:name="com.google.android.maps" />
 
     <application
         android:allowBackup="true"
@@ -11,6 +17,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCaW-MscyaNlRYs4K1oJjkseCO0mAAANA8" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +31,10 @@
         </activity>
         <activity android:name=".FavoritesActivity" />
         <activity android:name=".WmMapActivity" />
-        <activity android:name=".PushHistoryActivity"></activity>
+        <activity android:name=".PushHistoryActivity" />
+        <activity android:name=".GmMapActivity" />
+        <activity android:name=".WmListActivity" />
+        <activity android:name=".WmInfoActivity"></activity>
     </application>
 
 </manifest>
