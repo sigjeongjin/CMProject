@@ -2,6 +2,7 @@ package cmproject.com.cmproject;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ListView;
 
 public class PushHistoryActivity extends AppCompatActivity {
@@ -15,8 +16,10 @@ public class PushHistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_push_history);
 
         String url = "";
-        (new HttpConnect()).execute(url);
+        HttpConnect httpConnect = new HttpConnect();
+        httpConnect.execute();
 
+        Log.d("STRING",httpConnect.jsonReturnObject().toString());
 
 //        pushHistoryListView = (ListView) findViewById(R.id.pushHistoryListView);
 //

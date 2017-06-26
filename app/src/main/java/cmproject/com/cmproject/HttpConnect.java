@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 
 /**
  * Created by we25 on 2017-06-26.
@@ -20,61 +21,61 @@ import java.net.URL;
 class HttpConnect extends AsyncTask<String, Void, Boolean> {
 
     String urlStr;
+    public HashMap<String,String> returnObject = new HashMap<String,String>();
 
     @Override
     protected Boolean doInBackground(String... params) {
 
         StringBuffer sb = new StringBuffer();
-        try {
 
+        try {
             //주어진 URL 문서의 내용을 문자열로 얻는다.
             String jsonPage = getStringFromUrl("http://192.168.0.230:3000/min");
 
             //읽어들인 JSON포맷의 데이터를 JSON객체로 변환
             JSONObject json = new JSONObject(jsonPage);
 
-            Log.d("JSON CONTENTS", json.toString());
+            String arrayTrueFalse = json.getString("array");
 
-            //ksk_list의 값은 배열로 구성 되어있으므로 JSON 배열생성
-            JSONArray jArr = json.getJSONArray("ksk_list");
+            if(arrayTrueFalse.equals("0")) {
+                returnObject.put("name",json.getString("name"));
+                returnObject.put("pwd",json.getString("pwd"));
+            } else {
+                JSONArray jArr = json.getJSONArray("ksk_list");
 
-            //배열의 크기만큼 반복하면서, ksNo과 korName의 값을 추출함
+                //배열의 크기만큼 반복하면서, ksNo과 korName의 값을 추출함
 
-            Log.d("JSON CONFIRM" , String.valueOf(jArr.length()));
+                Log.d("JSON CONFIRM" , String.valueOf(jArr.length()));
 
-            for (int i=0; i<jArr.length(); i++){
+                for (int i=0; i<jArr.length(); i++){
 
-                //i번째 배열 할당
-                json = jArr.getJSONObject(i);
+                    //i번째 배열 할당
+                    json = jArr.getJSONObject(i);
 
-                //ksNo,korName의 값을 추출함
-                String ksNo = json.getString("ksNo");
-                String korName = json.getString("korName");
-                System.out.println("ksNo:"+ksNo+"/korName:"+korName);
+                    //ksNo,korName의 값을 추출함
+                    String ksNo = json.getString("ksNo");
+                    String korName = json.getString("korName");
+                    System.out.println("ksNo:"+ksNo+"/korName:"+korName);
 
-                //StringBuffer 출력할 값을 저장
-                sb.append("[ "+ksNo+" ]\n");
-                sb.append(korName+"\n");
-                sb.append("\n");
+                    //StringBuffer 출력할 값을 저장
+                    sb.append("[ "+ksNo+" ]\n");
+                    sb.append(korName+"\n");
+                    sb.append("\n");
+                }
+                return true;
             }
-
-            return true;
         } catch (Exception e) {
-            // TODO: handle exception
             return false;
         }
+        return true;
     }
 
     public String getStringFromUrl(String pUrl){
-
-        Log.d("STRING3","TEST3");
 
         BufferedReader bufreader=null;
         HttpURLConnection urlConnection = null;
 
         StringBuffer page=new StringBuffer(); //읽어온 데이터를 저장할 StringBuffer객체 생성
-
-        Log.d("STRING4","TEST4");
 
         try {
 
@@ -85,21 +86,11 @@ class HttpConnect extends AsyncTask<String, Void, Boolean> {
             InputStream contentStream = response.getEntity().getContent();
             */
 
-            Log.d("STRING5","TEST5");
-
             //[Type2]
             URL url= new URL(pUrl);
             urlConnection = (HttpURLConnection) url.openConnection();
 
-            Log.d("STRING6","TEST6");
-
-
-            Log.d("RESPONSE MESSAGE",urlConnection.getResponseMessage());
-            Log.d("RESPONSE CODE",String.valueOf(urlConnection.getResponseCode()));
-
             InputStream contentStream = urlConnection.getInputStream();
-
-            Log.d("STRING7","TEST7");
 
             bufreader = new BufferedReader(new InputStreamReader(contentStream,"UTF-8"));
             String line = null;
@@ -128,4 +119,7 @@ class HttpConnect extends AsyncTask<String, Void, Boolean> {
         return page.toString();
     }// getStringFromUrl()-------------------------
 
+    public HashMap<String,String> jsonReturnObject(){
+        return  returnObject;
+    }
 }
