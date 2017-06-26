@@ -11,10 +11,5 @@ public class FavoritesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_favorites);
 
 
-
-
-
-
-
     }
 }
